@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import dummy from "../src/data/dummy";
+import Card from "./component/Card";
+import Slider from "react-slick";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 200,
+      slidesToShow: 7,
+      slidesToScroll: 1,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      cssEase: "linear"
+    };
+    return (
+      <div style={{display:'flex', justifyContent:'center'}}>
+        <div style={{ width: "1000px" }}>
+          <Slider {...settings}>
+            {dummy.map(item => {
+              return <Card image={item.image} title={item.name} />;
+            })}
+          </Slider>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
